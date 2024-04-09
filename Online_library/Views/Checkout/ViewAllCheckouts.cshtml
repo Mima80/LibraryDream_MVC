@@ -1,0 +1,49 @@
+﻿@model List<Entities.BookCheckout>
+
+@{
+    ViewData["Title"] = "View all checkouts";
+}
+
+<div class="container mt-5 ">
+    <h2 class="text-center">View All Checkouts</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Checkout ID</th>
+                <th>Book Name</th>
+                <th>User Name</th>
+                <th>Checkout Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var checkout in Model)
+            {
+                <tr>
+                    <td>@checkout.CheckoutId</td>
+                    <td>@checkout.Book?.Name</td>
+                    <td>@checkout.UserName</td>
+                    <td>@checkout.CheckoutDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <form asp-controller="Checkout" asp-action="CloseCheckout" method="post">
+                            <input type="hidden" name="checkoutId" id="checkoutId" value="@checkout.CheckoutId" />
+                                <button type="submit" class="btn btn-primary">Book returned</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No checkouts available.</p>
+    }
+
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <button type="submit" class="btn btn-secondary">Back to Index</button>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+﻿@model Entities.BookCheckout
+
+@{
+    ViewData["Title"] = "Order book";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">Reserve Book</h2>
+            <div asp-validation-summary="All"></div>
+            <form asp-controller="Checkout" asp-action="AddCheckout" method="post">
+                <input type="hidden" asp-for="BookId" value="@Model.BookId" />
+                <input type="hidden" asp-for="UserName" value="@User.Identity.Name" />
+                <input type="hidden" asp-for="CheckoutDate" value="@DateOnly.FromDateTime(DateTime.Today)" />
+
+
+                <div class="mb-3">
+                    <label class="form-label">Full Name:</label>
+                    <input type="text" asp-for="FullName" class="form-control" required />
+                    <span asp-validation-for="FullName"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone Number:</label>
+                    <input type="tel" asp-for="PhoneNumber" class="form-control" required />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Postal Code:</label>
+                    <input type="text" asp-for="PostalCode" class="form-control" required />
+                    <span asp-validation-for="PostalCode"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

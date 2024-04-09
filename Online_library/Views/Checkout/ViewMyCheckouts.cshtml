@@ -1,0 +1,64 @@
+﻿@model List<Entities.BookCheckout>
+
+@{
+    ViewData["Title"] = "View My Checkouts";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">View My Books</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Checkout ID</th>
+                    <th>Book Name</th>
+                    <th>Checkout Date</th>
+                    <th>Return Date</th>
+                    <th>Postal Code</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var checkout in Model)
+            {
+                <tr>
+                    <td>@checkout.CheckoutId</td>
+                    <td>@checkout.Book?.Name</td>
+                    <td>@checkout.CheckoutDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        @if (checkout.ReturnDate != DateOnly.MinValue)
+                        {
+                            @checkout.ReturnDate.ToString("yyyy-MM-dd")
+                        }
+                        else
+                        {
+                            <span>Not Returned Yet</span>
+                        }
+                    </td>
+                    <td>@checkout.PostalCode</td>
+                    <td>
+                        @if (checkout.ReturnDate != DateOnly.MinValue)
+                        {
+                            <span class="badge bg-success">Returned</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Not Returned</span>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No checkouts available.</p>
+    }
+
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <button type="submit" class="btn btn-secondary">Back to Index</button>
+    </form>
+</div>

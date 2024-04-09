@@ -1,0 +1,59 @@
+﻿@model Entities.Book
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">Add Book</h2>
+            <div asp-validation-summary="All"></div>
+            <form id="createBookForm" name="createBookForm" class="mb-4" asp-controller="Book" asp-action="AddBook" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Book Name:</label>
+                    <input type="text" asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description:</label>
+                    <textarea asp-for="Description" class="form-control" required></textarea>
+                    <span asp-validation-for="Description"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Author:</label>
+                    <input type="text" asp-for="Author" class="form-control" required />
+                    <span asp-validation-for="Author"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tags (comma-separated):</label>
+                    <input type="text" id="tagsString" name="tagsString" class="form-control" required/>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+
+            <form asp-controller="Home" asp-action="Index" method="get">
+                <button type="submit" class="btn btn-secondary btn-block">Back to Index</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelector("#createBookForm").addEventListener("submit", (event) => {
+        const tagsInput = document.querySelector("#tagsString");
+        const tagsArray = tagsInput.value.split(",");
+        for (let i = 0; i < tagsArray.length; i++) {
+            let tag = document.createElement('input');
+            tag.type = 'hidden';
+            tag.setAttribute('id', `Tags[${i}]`);
+            tag.setAttribute('name', `Tags[${i}]`);
+            tag.setAttribute('value', tagsArray[i]);
+            document.querySelector('#createBookForm').appendChild(tag);
+        }
+    });
+</script>

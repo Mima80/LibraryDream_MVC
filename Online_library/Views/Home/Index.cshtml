@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "LibraryDream";
+}
+
+<div class="container mt-4 text-center">
+    <h2>LibraryDream</h2>
+    <h2>Welcome, @ViewBag.CurrentUserName!</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        <h2 class="text-danger">You are the Administrator.</h2>
+    }
+    <div class="btn-group mt-5">
+        <form class="btn mb-2" asp-controller="Book" asp-action="ViewAllBooks" method="get">
+            <button type="submit" class="btn btn-primary fs-3">View All Books</button>
+        </form>
+
+        <form class="btn mb-2" asp-controller="Checkout" asp-action="ViewMyCheckouts" method="get">
+            <button type="submit" class="btn btn-primary fs-3">My Books</button>
+        </form>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <form class="btn mb-2" asp-controller="Book" asp-action="AddBook" method="get">
+                <button type="submit" class="btn btn-primary fs-3">Add Book</button>
+            </form>
+
+            <form class="btn mb-2" asp-controller="Checkout" asp-action="ViewAllCheckouts" method="get">
+                <button type="submit" class="btn btn-primary fs-3">View All Checkouts</button>
+            </form>
+        }
+
+        <form id="logoutForm" class="btn mb-2" asp-controller="Account" asp-action="Logout" method="post">
+            <button type="submit" class="btn btn-danger fs-3">Logout</button>
+        </form>
+    </div>
+</div>
+<div class="row mt-5">
+    <h3 class="text-center">How to use LibraryDream?</h3>
+    <div class="col-md-8 offset-md-2">
+        <ol>
+            <li>
+                <h4>Explore the Book Catalog:</h4>
+                <p>Navigate to the "Book Catalog" section to discover a comprehensive table containing all the books available in our library. Browse through titles, authors, genres, and more to find the literary gems you're interested in.</p>
+            </li>
+
+            <li>
+                <h4>Rent and Order Books:</h4>
+                <p>Our library offers a convenient functionality for renting and ordering books. When you find a book you'd like to read, simply use the "Rent" or "Order" option to seamlessly acquire the literary material you desire. Enjoy your favorite books without any hassle.</p>
+            </li>
+
+            <li>
+                <h4>Manage Your Orders:</h4>
+                <p>Keep track of your rented and ordered books by visiting the "My Orders" section. Here, you can view a list of your current and past orders, making it easy to manage your reading preferences and stay organized.</p>
+            </li>
+
+            <li>
+                <h4>Comment and Share Your Thoughts:</h4>
+                <p>Engage with the literary community by leaving comments and sharing your thoughts on the books you've read. The "Comments" section allows you to express your opinions, recommendations, and insights, fostering a dynamic and interactive reading experience.</p>
+            </li>
+
+            <li>
+                <h4>Explore Available Books:</h4>
+                <p>Discover the full range of books available in our library by exploring the "Available Books" section. Stay informed about the latest additions, popular titles, and diverse genres to enhance your reading journey.</p>
+            </li>
+            
+            <p>We hope this comprehensive guide enhances your experience with our online library. If you have any questions or need assistance, feel free to reach out to our support team. Happy reading!</p>
+        </ol>
+    </div>
+</div>
+
+    
+
