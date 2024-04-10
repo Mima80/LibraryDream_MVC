@@ -10,8 +10,6 @@ using Repositories;
 using RepositoryContracts;
 using ServiceContracts;
 using Services;
-using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using System;
 
 namespace LibraryDream.StartupExtensions
 {
